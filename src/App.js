@@ -1,26 +1,30 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux'
+import {getAccountDetails, getSpending, getSavingsGoal} from './store/middleware'
+function AppBase(props) {
 
-function App() {
+
+  console.log("props",props)
+  useEffect(() => {
+    // Update the document title using the browser API
+    props.getAccountDetails()
+    props.getSavingsGoal()
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={props.getSpending}>Get your spending</button>
     </div>
   );
 }
+
+const mapStateToProps = state => state
+const mapDispatchToProps = {
+  getAccountDetails,
+  getSpending,
+  getSavingsGoal  
+}
+const App = connect(mapStateToProps, mapDispatchToProps)(AppBase)
 
 export default App;
