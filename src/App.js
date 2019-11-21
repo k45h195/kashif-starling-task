@@ -1,30 +1,27 @@
-import React, {useEffect} from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
-import {connect} from 'react-redux'
-import {getAccountDetails, getSpending, getSavingsGoal} from './store/middleware'
+import { connect } from 'react-redux'
+import { getAccountDetails } from './store/middleware'
+import { ButtonsSections } from './buttonsSections'
+import { Table } from './table'
 function AppBase(props) {
-
-
-  console.log("props",props)
+  console.log("props", props)
   useEffect(() => {
     // Update the document title using the browser API
     props.getAccountDetails()
-    props.getSavingsGoal()
   }, []);
   return (
-    <div className="App">
-      <button onClick={props.getSpending}>Get your spending</button>
-    </div>
+    <>
+      <ButtonsSections />
+      <Table />
+    </>
   );
 }
 
-const mapStateToProps = state => state
+
 const mapDispatchToProps = {
-  getAccountDetails,
-  getSpending,
-  getSavingsGoal  
+  getAccountDetails
 }
-const App = connect(mapStateToProps, mapDispatchToProps)(AppBase)
+const App = connect(null, mapDispatchToProps)(AppBase)
 
 export default App;
