@@ -1,8 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { getAccountDetails, getSpending, getSavingsGoal, getRoundUpGoal, putRoundGoal, putSavingsGoals } from './store/middleware'
+import { 
+    getAccountDetails, 
+    getSpending, 
+    getSavingsGoal, 
+    getRoundUpGoal, 
+    putRoundGoal, 
+    putSavingsGoals, 
+    createSavingsGoals
+  } from './store/middleware'
 const ButtonsSectionsBase = (props) => {
+  
   const { accountUid, defaultCategory } = props.accountDetails.accounts ? props.accountDetails.accounts[0] : { accountUid: null, defaultCategory: null }
+  console.log(accountUid)
   const handleGetSpending = () => {
 
     props.getSpending(accountUid, defaultCategory)
@@ -20,7 +30,7 @@ const ButtonsSectionsBase = (props) => {
     props.putSavingsGoals(accountUid, body)
   }
 
-  const handleSetUpSavingsGoal = () => {
+  const handleCreateSavingsGoal = () => {
     const body = {
       "name": "Trip to Paris",
       "currency": "GBP",
@@ -30,15 +40,14 @@ const ButtonsSectionsBase = (props) => {
       },
       "base64EncodedPhoto": "string"
     }
-    props.putSavingsGoals(accountUid, body)
+    props.createSavingsGoals(accountUid, body)
   }
 
   return (
     <>
       <button onClick={handleGetSpending} disabled={!accountUid}>Get your spending</button>
-      <button onClick={handleGetRoundUp} disabled={!accountUid}>Get your round up figure</button>
-      <button onClick={handleSetUpRoundUp} disabled={!accountUid}>Set round up thing</button>
-      <button onClick={handleSetUpSavingsGoal} disabled={!accountUid}>Create savings goal</button>
+      <button onClick={() =>{}} disabled={!accountUid}>Get savings goals</button>
+      <button onClick={handleCreateSavingsGoal} disabled={!accountUid}>Create savings goal</button>
     </>
   )
 
@@ -51,7 +60,8 @@ const mapDispatchToProps = {
   getSavingsGoal,
   getRoundUpGoal,
   putRoundGoal,
-  putSavingsGoals
+  putSavingsGoals,
+  createSavingsGoals
 }
 
 const ButtonsSections = connect(mapStateToProps, mapDispatchToProps)(ButtonsSectionsBase)
