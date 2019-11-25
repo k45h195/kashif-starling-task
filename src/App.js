@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { getAccountDetails } from './store/middleware'
 import { ButtonsSections } from './buttonsSections'
 import { Table } from './table'
+import {SavingsGoalsFormBase, SavingsGoalsForm} from './savings-goal-form'
+
 function AppBase(props) {
   console.log("props", props)
   useEffect(() => {
@@ -13,15 +15,16 @@ function AppBase(props) {
   return (
     <>
       <ButtonsSections />
-      <Table />
+      <SavingsGoalsForm />
     </>
   );
 }
 
 
 const mapDispatchToProps = {
-  getAccountDetails
+  getAccountDetails,
 }
+
 const App = connect(null, mapDispatchToProps)(AppBase)
 
 export default App;

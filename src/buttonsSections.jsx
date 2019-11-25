@@ -6,7 +6,6 @@ import {
     getSavingsGoal, 
     getRoundUpGoal, 
     putRoundGoal, 
-    putSavingsGoals, 
     createSavingsGoals
   } from './store/middleware'
 const ButtonsSectionsBase = (props) => {
@@ -27,7 +26,7 @@ const ButtonsSectionsBase = (props) => {
       "roundUpGoalUid": "77887788-7788-7788-7788-778877887788",
       "roundUpMultiplier": 2
     }
-    props.putSavingsGoals(accountUid, body)
+    props.createSavingsGoals(accountUid, body)
   }
 
   const handleCreateSavingsGoal = () => {
@@ -60,7 +59,6 @@ const mapDispatchToProps = {
   getSavingsGoal,
   getRoundUpGoal,
   putRoundGoal,
-  putSavingsGoals,
   createSavingsGoals
 }
 

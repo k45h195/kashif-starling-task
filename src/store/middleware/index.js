@@ -18,25 +18,6 @@ export const putController =  async(endpoint, body) => {
 
     return await response.json()
 }
-
-export const postController =  async(endpoint, body) => {
-    const response = await nodeFetch(`http://localhost:7000${endpoint}`,{
-        method: 'post',
-        body
-    })
-
-    return await response.json()
-}
-
-// const httpController = (method) => async (endpoint, body) => {
-//     const response = await nodeFetch(`http://localhost:7000${endpoint}`,{
-//         method,
-//         body
-//     })
-
-//     return await response.json()
-// }
-
 export const getAccountDetails = () => {
     return dispatch => {
         getController("/")
@@ -75,7 +56,6 @@ export const getRoundUpGoal = (accountUid) => {
 }
 
 export const putRoundGoal  = (accountUid, body) => {
-    console.log("accountUid", accountUid)
     return dispatch => {
         putController(`/round-up?accountUid=${accountUid}`, JSON.stringify(body))
             .then(res => JSON.parse(res))
@@ -84,18 +64,18 @@ export const putRoundGoal  = (accountUid, body) => {
     }
 }
 
-export const putSavingsGoals = (accountUid, body) => {
+export const createSavingsGoals = (accountUid, bodyInfo) => {
+    
+    const body = {
+        name: bodyInfo.name,
+        currency: "GBP",
+        target :{
+            currency : "GBP",
+            minorUnits: bodyInfo.target
+        }
+    }
     return dispatch => {
         putController(`/savings-goals?accountUid=${accountUid}`, body)
-            .then(res => JSON.parse(res))
-            .then(payload => console.log("Hey the savings goals has been set up", payload))
-            .catch(err => console.log(`got an error ${err}`))
-    }
-}
-
-export const createSavingsGoals = (accountUid, body) => {
-    return dispatch => {
-        postController(`/savings-goals?accountUid=${accountUid}`, body)
             .then(res => JSON.parse(res))
             .then(payload => console.log("Hey the savings goals has been set up", payload))
             .catch(err => console.log(`got an error ${err}`))
