@@ -4,30 +4,29 @@ import {
     getAccountDetails, 
     getSpending, 
     getSavingsGoal, 
-    getRoundUpGoal, 
-    putRoundGoal, 
     createSavingsGoals
   } from './store/middleware'
 const ButtonsSectionsBase = (props) => {
   
   const { accountUid, defaultCategory } = props.accountDetails.accounts ? props.accountDetails.accounts[0] : { accountUid: null, defaultCategory: null }
-  console.log(accountUid)
   const handleGetSpending = () => {
 
     props.getSpending(accountUid, defaultCategory)
   }
 
   const handleGetRoundUp = () => {
-    props.getRoundUpGoal(accountUid)
+    // props.getRoundUpGoal(accountUid)
   }
 
-  const handleSetUpRoundUp = () => {
-    const body = {
-      "roundUpGoalUid": "77887788-7788-7788-7788-778877887788",
-      "roundUpMultiplier": 2
-    }
-    props.createSavingsGoals(accountUid, body)
-  }
+  const handleGetSavingsGoals = () => props.getSavingsGoal()
+
+  // const handleSetUpRoundUp = () => {
+  //   const body = {
+  //     "roundUpGoalUid": "77887788-7788-7788-7788-778877887788",
+  //     "roundUpMultiplier": 2
+  //   }
+  //   props.createSavingsGoals(accountUid, body)
+  // }
 
   const handleCreateSavingsGoal = () => {
     const body = {
@@ -44,8 +43,8 @@ const ButtonsSectionsBase = (props) => {
 
   return (
     <>
-      <button onClick={handleGetSpending} disabled={!accountUid}>Get your spending</button>
-      <button onClick={() =>{}} disabled={!accountUid}>Get savings goals</button>
+      {/* <button onClick={handleGetSpending} disabled={!accountUid}>Get your spending</button> */}
+      <button onClick={handleGetSavingsGoals} disabled={!accountUid}>Get savings goals</button>
       <button onClick={handleCreateSavingsGoal} disabled={!accountUid}>Create savings goal</button>
     </>
   )
@@ -57,8 +56,6 @@ const mapDispatchToProps = {
   getAccountDetails,
   getSpending,
   getSavingsGoal,
-  getRoundUpGoal,
-  putRoundGoal,
   createSavingsGoals
 }
 

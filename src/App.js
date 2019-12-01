@@ -4,18 +4,23 @@ import { connect } from 'react-redux'
 import { getAccountDetails } from './store/middleware'
 import { ButtonsSections } from './buttonsSections'
 import { Table } from './table'
+import {AccountsTable} from './accountsTable'
 import {SavingsGoalsFormBase, SavingsGoalsForm} from './savings-goal-form'
+import {Notifications} from './notifications'
+import {SavingsGoals} from './savingsGoals'
 
 function AppBase(props) {
-  console.log("props", props)
   useEffect(() => {
     // Update the document title using the browser API
     props.getAccountDetails()
   }, []);
   return (
     <>
+      <Notifications />
       <ButtonsSections />
-      <SavingsGoalsForm />
+      <AccountsTable />
+      {/* <SavingsGoalsForm /> */}
+      <SavingsGoals />
     </>
   );
 }

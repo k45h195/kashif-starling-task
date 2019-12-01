@@ -1,10 +1,10 @@
-import {SET_ACCOUNT_DETAILS, SET_SPENDING_DETAILS, SET_SAVINGS_GOAL} from '../actions'
+import {SET_ACCOUNT_DETAILS, SET_SPENDING_DETAILS, SET_SAVINGS_GOAL, ERROR} from '../actions'
 
 const initialState = {
-    accountDetails : {},
+    accountDetails : [],
     spendingDetails: [{}],
-    savingsGoals: {},
-
+    savingsGoals: [],
+    errorDetails: {}
 }
 
 const accountInfo = (state = initialState, action) =>  {
@@ -15,6 +15,8 @@ const accountInfo = (state = initialState, action) =>  {
           return {...state, spendingDetails: action.payload.feedItems}
       case SET_SAVINGS_GOAL:
           return {...state, savingsGoals: action.payload}
+      case ERROR:
+          return {...state, errorDetails: {...action.payload}}
       default:
         return state
     }
