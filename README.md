@@ -7,9 +7,6 @@ To access the sandbox for the starling api you will need to specify the access t
 
 # To run.
 cd into the directory
-to install the dependencies run
-# yarn
-once the dependencies are install, to run the server
-# node index.js
-
+to install the dependencies run **yarn**
+Once the dependencies are installed, to run the server run **node index.js**
 this will start on the server on port 7000. CORS headers are returned, so you shouldn't have to install any cors add-ons for the browser
