@@ -5,7 +5,7 @@ import {getRoundUp} from './store/middleware'
 const RoundUpbase = (props) => {
 
     const handleGetRoundUp = () => props.getRoundUp()
-    return <button onClick={handleGetRoundUp}>Get round up</button>
+    return <button disabled onClick={handleGetRoundUp}>Get round up</button>
 }
 
 const mapStateToProps = ({accountDetails, selectedAccount}) => ({accountDetails, selectedAccount})

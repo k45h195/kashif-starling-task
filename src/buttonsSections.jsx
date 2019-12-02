@@ -44,8 +44,8 @@ const ButtonsSectionsBase = (props) => {
   return (
     <>
       {/* <button onClick={handleGetSpending} disabled={!accountUid}>Get your spending</button> */}
-      <button onClick={handleGetSavingsGoals} disabled={!accountUid}>Get savings goals</button>
-      <button onClick={handleCreateSavingsGoal} disabled={!accountUid}>Create savings goal</button>
+      <button onClick={handleGetSavingsGoals} disabled >Get savings goals</button>
+      <button onClick={handleCreateSavingsGoal} disabled>Create savings goal</button>
     </>
   )
 

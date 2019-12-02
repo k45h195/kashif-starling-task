@@ -15,5 +15,4 @@ export async function api() {
       }
       
     let response = await axios(settings)
-    console.log("response", response)
 }

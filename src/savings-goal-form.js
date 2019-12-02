@@ -6,7 +6,6 @@ import {createSavingsGoals} from './store/middleware'
 const initialValues = { savingsPotName: "", savingsPotTarget: "" }
 
 const SavingsGoalsFormBase = props => {
-    console.log("props", props.accountDetails.accounts && props.accountDetails.accounts[0].accountUid)
     return (
       <Formik initialValues={initialValues} onSubmit={() =>{}} enableReinitialize>
         {(props) => {

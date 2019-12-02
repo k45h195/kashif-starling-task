@@ -13,12 +13,10 @@ const initialValues = { savingsPotName: "", savingsPotTarget: "" }
     })
 
   const AddMoneyFormBase = props => {
-      console.log("propssopsos", props.savingsGoal[0].savingsGoalUid)
-      console.log("propssopsos", props.savingsGoal[0].target.currency)
       const [savingsValue, setSavingsValue] = useState(0)
       const handleOnChange = e => console.log(e.target.value) || setSavingsValue(e.target.value)
       // accountUid, savingsGoalUid, transferUid, body
-        const handleAddMoney = () => console.log("afds") || addMoney(savingsValue, uuidv4(), contructBody(props.savingsGoal[0].target.currency, savingsValue))
+        const handleAddMoney = () => props.addMoney(props.savingsGoal[0].savingsGoalUid, uuidv4(), contructBody(props.savingsGoal[0].target.currency, savingsValue))
         return(
             <div className="container">
             <label>{props.savingsGoal[0].name}</label>

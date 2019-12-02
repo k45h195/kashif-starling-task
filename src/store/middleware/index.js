@@ -12,8 +12,12 @@ export const getController = async (endpoint) => {
 
 export const putController =  async(endpoint, body) => {
     const response = await nodeFetch(`http://localhost:7000${endpoint}`,{
-        method: 'put',
-        body
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          }
     })
     return await response.json()
 }
@@ -39,7 +43,6 @@ export const getSpending = (accountUid, categoryUid) => {
 }
 
 export const getSavingsGoal = (accountUid) => {
-    console.log("gteeeee", accountUid)
     return (dispatch, getState) => {
         // what if you have more than one savings account
         getController(`/savings-goals?accountUid=${accountUid}`)
@@ -70,8 +73,8 @@ export const createSavingsGoals = (accountUid, bodyInfo) => {
 
 export const addMoney = ( savingsGoalUid, transferUid, body) => {
     return (dispatch, getState) => {
-        const accountUid = getState().selectedAccount. 
-        putController(`/add-money?accountUid=${accountUid}&savingsGoal=${savingsGoalUid}&transferUid=${transferUid}`, body)
+        const accountUid = getState().selectedAccount.accountUid
+        putController(`/add-money?accountUid=${accountUid}&savingsGoalUid=${savingsGoalUid}&transferUid=${transferUid}`, body)
             .then(payload => console.log("Hey the savings goals has been set up", payload))
             .catch(err => console.log(`got an error ${err}`))
     }
