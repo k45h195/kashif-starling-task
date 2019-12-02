@@ -1,5 +1,5 @@
 
-import { SET_ACCOUNT_DETAILS, SET_SPENDING_DETAILS, SET_SAVINGS_GOAL, ERROR } from '../actions'
+import { SET_ACCOUNT_DETAILS, SET_SPENDING_DETAILS, SET_SAVINGS_GOAL, ERROR, ROUND_UP } from '../actions'
 import nodeFetch from 'node-fetch'
 
 export const getController = async (endpoint) => {
@@ -68,10 +68,20 @@ export const createSavingsGoals = (accountUid, bodyInfo) => {
     }
 }
 
-export const addMoney = ( accountUid, savingsGoalUid, transferUid, body) => {
-    return dispatch => {
+export const addMoney = ( savingsGoalUid, transferUid, body) => {
+    return (dispatch, getState) => {
+        const accountUid = getState().selectedAccount. 
         putController(`/add-money?accountUid=${accountUid}&savingsGoal=${savingsGoalUid}&transferUid=${transferUid}`, body)
             .then(payload => console.log("Hey the savings goals has been set up", payload))
             .catch(err => console.log(`got an error ${err}`))
+    }
+}
+
+export const getRoundUp = () => {
+    return (dispatch, getState) => {
+        const accountUid = getState().selectedAccount.accountUid
+        getController(`/round-up?accountUid=${accountUid}`)
+        .then(payload => dispatch({type: ROUND_UP, payload}))
+        .catch(err => console.error(`Got an error with the getting the  round up: ${err}`))
     }
 }

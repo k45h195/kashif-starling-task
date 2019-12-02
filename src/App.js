@@ -20,6 +20,7 @@ function AppBase(props) {
       <ButtonsSections />
       <AccountsTable />
       {/* <SavingsGoalsForm /> */}
+      {/* <Table /> */}
       <SavingsGoals />
     </>
   );

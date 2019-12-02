@@ -61,4 +61,4 @@ const SavingsGoalsDisplay = (props) => (
 // {"18":{"savingsGoalUid":"221de3b0-2e64-428a-a5ab-5177ed0c0e16","name":"Trip to Paris","target":{"currency":"GBP","minorUnits":11223344},"totalSaved":{"currency":"GBP","minorUnits":0},"savedPercentage":0}}
 const mapStateToProps =  ({savingsGoals}) => ({savingsGoals})
 
-export const SavingsGoals = connect(mapStateToProps)(SavingsGoalsBase)
+export const    SavingsGoals = connect(mapStateToProps)(SavingsGoalsBase)

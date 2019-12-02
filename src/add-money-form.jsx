@@ -1,7 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import "./form.css"
 import {addMoney} from './store/middleware' 
+const uuidv4 = require('uuid/v4');
 const initialValues = { savingsPotName: "", savingsPotTarget: "" }
 
     const contructBody = (currency, minorUnits) => ({
@@ -12,20 +13,24 @@ const initialValues = { savingsPotName: "", savingsPotTarget: "" }
     })
 
   const AddMoneyFormBase = props => {
-        const handleAddMoney = () => addMoney()
+      console.log("propssopsos", props.savingsGoal[0].savingsGoalUid)
+      console.log("propssopsos", props.savingsGoal[0].target.currency)
+      const [savingsValue, setSavingsValue] = useState(0)
+      const handleOnChange = e => console.log(e.target.value) || setSavingsValue(e.target.value)
+      // accountUid, savingsGoalUid, transferUid, body
+        const handleAddMoney = () => console.log("afds") || addMoney(savingsValue, uuidv4(), contructBody(props.savingsGoal[0].target.currency, savingsValue))
         return(
             <div className="container">
             <label>{props.savingsGoal[0].name}</label>
-              <label>Target Amount</label>
+              <label>Amount to transfer in pence</label>
               <input
                   id="savingsPotTarget"
                   name="savingsPotTarget"
                   type="number" min="1" step="1" max="1000000"
-                  onChange={() => {}}
-                  onBlur={null}
-                  value={""}
+                  onChange={handleOnChange}
+                  value={savingsValue}
               />
-              <button type="submit"  onClick={()=>{}}>
+              <button disabled={savingsValue<=0} type="submit" onClick={handleAddMoney}>
                   Submit
             </button>
             </div>

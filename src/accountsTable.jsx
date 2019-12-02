@@ -1,14 +1,23 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {getSavingsGoal} from './store/middleware'
+import {setSelectedAccount} from './store/reducers'
+import {RoundUP} from './round-up'
 const AccountsTableBase = (props) => {
+
+    const getAccountFromCurrency = (currency) => props.accountDetails.accounts.filter(account => account.currency === currency)[0]
+
     const [checkboxValue, setCheckboxValue] = useState(null)
     // at the moment will just set up one currency at a time
-    const onChange= (e) => setCheckboxValue(e.target.value)
+    const onChange= (e) => {
+        setCheckboxValue(e.target.value)
+        const account = getAccountFromCurrency(e.target.value)
+        props.setSelectedAccount(account)
+    }
 
     const handlegetSavingsGoal = () => {
-        const accountToGetSavingsGoalFor = props.accountDetails.accounts.filter(account => account.currency === checkboxValue)
-        props.getSavingsGoal(accountToGetSavingsGoalFor[0].accountUid)
+        const accountToGetSavingsGoalFor = getAccountFromCurrency(checkboxValue)
+        props.getSavingsGoal(accountToGetSavingsGoalFor.accountUid)
     }
         
 
@@ -19,6 +28,7 @@ const AccountsTableBase = (props) => {
             <button disabled={!checkboxValue} onClick={handlegetSavingsGoal}>
                 Get the spending goals
             </button>
+            <RoundUP/>
             </>
        )
     }
@@ -43,7 +53,8 @@ const AccountDisplay = ({currency, onChange, checked}) =>(
 const mapStateToProps = ({accountDetails}) => ({accountDetails})
 
 const mapDispatchToProps = {
-    getSavingsGoal
+    getSavingsGoal,
+    setSelectedAccount
 }
 
 export const AccountsTable = connect(mapStateToProps, mapDispatchToProps)(AccountsTableBase)

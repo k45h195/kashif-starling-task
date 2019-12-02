@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 
 const columns = [{
     Header: 'Source',
-    accessor: 'source' // String-based value accessors!
+    accessor: 'source'
   },
   {
       Header: 'Time',
